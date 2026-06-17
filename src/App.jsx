@@ -65,33 +65,7 @@ function App() {
               onAnimationEnd={() => setIsSpinning(false)}
               aria-label="pet the cat"
             >
-              <svg viewBox="0 0 120 120" fill="none" aria-hidden="true">
-                <circle cx="60" cy="60" r="41" className="cat-stroke" />
-                <path
-                  d="M41 52 C42 43 48 36 56 36 C63 36 68 41 69 47 C70 51 69 56 72 61 C76 68 85 73 86 83"
-                  className="cat-stroke"
-                />
-                <path
-                  d="M52 55 L46 47 L44 59"
-                  className="cat-stroke"
-                />
-                <path
-                  d="M60 55 C63 55 65 58 65 62 C65 67 61 70 56 70 C51 70 47 66 47 61 C47 57 49 55 52 55"
-                  className="cat-stroke"
-                />
-                <path
-                  d="M56 60 L54 63 L56 65 L58 63 Z"
-                  className="cat-fill"
-                />
-                <path d="M49 63 L44 64" className="cat-stroke" />
-                <path d="M63 63 L68 64" className="cat-stroke" />
-                <path d="M51 67 L45 69" className="cat-stroke" />
-                <path d="M61 67 L67 69" className="cat-stroke" />
-                <path d="M73 54 C81 54 89 60 90 70 C91 81 84 90 74 92" className="cat-stroke" />
-                <path d="M27 61 C31 57 35 55 39 54" className="spark-stroke" />
-                <path d="M32 48 L33 53" className="spark-stroke" />
-                <path d="M27 49 L31 52" className="spark-stroke" />
-              </svg>
+              <img src="/panda-pet.svg" alt="" className="pet-icon" />
             </button>
             <div className="pet-note">
               <svg viewBox="0 0 78 20" fill="none" aria-hidden="true">
