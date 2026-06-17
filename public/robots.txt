@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://irangareddy.in/sitemap.xml
