@@ -1,6 +1,7 @@
 # irangareddy.in
 
-A Vite + React personal website inspired by the restrained editorial feel of [luthira.com](https://www.luthira.com/), adapted into a reusable one-page layout for your own domain.
+A Vite + React portfolio for Ranga Reddy: agent systems, on-device AI,
+Apple-platform work, physical computing, and applied ML projects.
 
 ## Local development
 
@@ -16,19 +17,16 @@ npm run build
 npm run preview
 ```
 
-## Personalize the content
+## Content
 
-Update the copy in `src/content.js`:
+Portfolio copy and project links live in `src/content.js`. The app exposes three
+client-side routes:
 
-- name and email
-- intro paragraphs
-- work and notebook cards
-- contact links
+- `/` — profile and selected work
+- `/work` — filterable public project archive
+- `/wall` — research and learning map
 
 ## Deploy to Vercel
 
-1. Push this repo to GitHub.
-2. Import the repository into Vercel.
-3. Vercel will detect Vite automatically.
-4. Use `npm run build` as the build command if you want to override defaults.
-5. Deploy.
+The included `vercel.json` rewrites client-side routes to `index.html`.
+Run `vercel --prod` from the repository root for a production deployment.
