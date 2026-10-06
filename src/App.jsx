@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { contactLinks, intro, learningWall, profile } from './content'
+import { contactLinks, intro, learningWall, now, outro, profile } from './content'
 
 const normalizePath = (path) => {
   if (!path || path === '/') {
@@ -41,6 +41,55 @@ function TopicWall() {
   )
 }
 
+function RichParagraphs({ paragraphs, leadFirst = false }) {
+  return paragraphs.map((paragraph, index) => (
+    <p key={index} className={leadFirst && index === 0 ? 'lead-line' : ''}>
+      {paragraph.map((part, partIndex) => (
+        part.href ? (
+          <a
+            key={`${index}-${partIndex}`}
+            className={part.underline ? 'inline-underline' : undefined}
+            href={part.href}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {part.text}
+          </a>
+        ) : (
+          <span
+            key={`${index}-${partIndex}`}
+            className={part.underline ? 'inline-underline' : undefined}
+          >
+            {part.text}
+          </span>
+        )
+      ))}
+    </p>
+  ))
+}
+
+function NowList() {
+  return (
+    <section className="now-section" aria-label="now">
+      <h2 className="now-heading">now</h2>
+      <ul className="now-list">
+        {now.map((item) => (
+          <li key={item.name} className="now-item">
+            {item.href ? (
+              <a className="now-name inline-underline" href={item.href} target="_blank" rel="noreferrer">
+                {item.name}
+              </a>
+            ) : (
+              <span className="now-name">{item.name}</span>
+            )}
+            <span className="now-detail">{item.detail}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
 function App() {
   const [isPetting, setIsPetting] = useState(false)
   const [isSpinning, setIsSpinning] = useState(false)
@@ -58,7 +107,7 @@ function App() {
       setPathname(normalizePath(window.location.pathname))
     }
 
-    document.title = isLearningWall ? 'wall | ranga reddy nukala' : 'ranga reddy nukala'
+    document.title = isLearningWall ? 'wall | ranga reddy nukala' : 'ranga reddy nukala · product engineer'
     window.addEventListener('popstate', handlePopState)
 
     return () => window.removeEventListener('popstate', handlePopState)
@@ -90,35 +139,14 @@ function App() {
             </p>
           </header>
 
-          <a className="hero-button" href={profile.buttonHref ?? '#'}>
-            {profile.buttonLabel}
-          </a>
-
           <div className="intro-copy">
-            {intro.map((paragraph, index) => (
-              <p key={index} className={index === 0 ? 'lead-line' : ''}>
-                {paragraph.map((part, partIndex) => (
-                  part.href ? (
-                    <a
-                      key={`${index}-${partIndex}`}
-                      className={part.underline ? 'inline-underline' : undefined}
-                      href={part.href}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {part.text}
-                    </a>
-                  ) : (
-                    <span
-                      key={`${index}-${partIndex}`}
-                      className={part.underline ? 'inline-underline' : undefined}
-                    >
-                      {part.text}
-                    </span>
-                  )
-                ))}
-              </p>
-            ))}
+            <RichParagraphs paragraphs={intro} leadFirst />
+          </div>
+
+          <NowList />
+
+          <div className="intro-copy outro-copy">
+            <RichParagraphs paragraphs={outro} />
           </div>
 
           <div className="pet-row">
