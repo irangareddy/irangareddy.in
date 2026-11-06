@@ -36,9 +36,9 @@ Update the copy in `src/content.js`:
 
 ## Portfolio homepage
 
-Design baseline approved on 2026-11-05: preserve the compact, lowercase, text-first homepage, neutral filters with a sage selected border, inline project disclosures, and brief interaction feedback. Keep future visual experiments on a separate branch until requested for the main design.
+Current design baseline approved on 2026-11-05: preserve the visible written biography beneath the name, its small text/tokens switch, the compact lowercase layout, neutral filters with a sage selected border, inline project disclosures, and brief interaction feedback. Restore point: `portfolio-visible-bio-baseline-2026-11-05`. The earlier `portfolio-minimal-baseline-2026-11-05` tag preserves the previous design. Keep future visual experiments on a separate branch until requested for the main design.
 
-The text-first homepage is the complete portfolio. Project rows expand in place to show attribution, the full description, and a public destination when one is available. The biography and searchable code archive are collapsible sections below the list. Notes live at `/wall` and are linked from the footer.
+The text-first homepage is the complete portfolio. The short biography is visible directly beneath the name, with a small text/tokens switch. Project rows expand in place to show attribution, the full description, and a public destination when one is available. The searchable code archive is a collapsible section below the list. Notes live at `/wall` and are linked from the footer.
 
 - `src/work.js`: grouped work entries, with team/prototype/coursework attribution and public links.
 - `src/content.js`: biography and featured entries selected from the complete work record.
@@ -56,3 +56,9 @@ Muted sage (`#B8C7B2`) marks only the selected filter's border and successful em
 Old `/work` URLs resolve to the homepage; project fragments select the full list and open the matching entry. The old `/work#context` URL opens the biography. Email can be opened normally or copied with the adjacent button, which confirms success or displays the address if clipboard access fails. Icons use Hugeicons' free Stroke Rounded set through `@hugeicons/react`. Filters update immediately; only their surface, link arrows, disclosure chevrons, and the cat respond with brief feedback. Keyboard link feedback is immediate, and `prefers-reduced-motion` disables animation and transitions.
 
 Open source is an overlapping facet: it includes work entries with a verified public repository and an identified MIT or Apache-2.0 license in the November 2026 review. A public GitHub URL alone does not set the flag. Update `openSource` and `license` in `src/work.js` when licensing changes. The 124-repository archive remains separate and includes clearly marked forks and learning repositories.
+
+### GPT token biography
+
+The approved visible biography has an optional token view. Its boundaries and IDs come from OpenAI's Python `tiktoken` library using `o200k_base`, encoded across the complete biography including paragraph separators. Phrase links wrap consecutive tokens without merging or recoloring token boundaries. All token colors are scoped to the biography; plain text remains the default.
+
+The generated `src/bio-tokens.json` ships only the small bio token sequence, not the tokenizer vocabulary. Builds verify it still matches `intro` and reconstructs the original text. After editing the bio, install `scripts/requirements-tokenizer.txt` in a Python environment and run `npm run tokenize:bio`. Ordinary builds require only Node and the checked-in token data. Hovering a token shows its ID.

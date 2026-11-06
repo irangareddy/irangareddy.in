@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "tokenize:bio": "python3 scripts/tokenize-bio.py",
+    "prebuild": "node scripts/check-bio-tokens.mjs",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

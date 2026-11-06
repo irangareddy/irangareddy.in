@@ -1,4 +1,4 @@
-import { workGroups } from './work'
+import { workGroups } from './work.js'
 
 export const profile = {
   name: 'ranga reddy nukala',
@@ -8,14 +8,25 @@ export const profile = {
 
 export const intro = [
   [
-    { text: "i'm a founding engineer in san francisco, working across ai, apps, and backend systems. my roots are in apple platforms." },
+    { text: 'i started with apple platforms. ' },
+    { text: 'the projects kept getting wider.' },
   ],
   [
-    { text: "currently co-founding beet, where i own the apps, backend api, llm event pipeline, and releases. elsewhere, i work on speech models, on-device inference, and interfaces that connect people to robots." },
+    { text: "i'm co-founding beet. along the way, i've built on-device dictation for mac, fine-tuned emotional speech models, and used vision pro to control a robot dog." },
   ],
   [
-    { text: 'two-time apple swift student challenge winner. m.s. in applied data intelligence from san josé state, 2026.' },
+    { text: '2× apple swift student challenge winner · m.s., san josé state, 2026' },
   ],
+]
+
+// Project links layered over the actual GPT token boundaries in the optional bio view.
+export const bioProjectLinks = [
+  { phrase: 'apple platforms', project: 'dew' },
+  { phrase: 'beet', project: 'startup' },
+  { phrase: 'speech models', project: 'voxe' },
+  { phrase: 'on-device dictation', project: 'wishper' },
+  { phrase: 'robot dog', project: 'go2' },
+  { phrase: 'swift student challenge', project: 'carbon' },
 ]
 
 // Selected public facts from the verified career record. Preserve team attribution,

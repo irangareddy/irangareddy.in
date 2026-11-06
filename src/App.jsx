@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { ArrowDown01Icon, ArrowRight01Icon, ArrowUpRight01Icon, Copy01Icon, Search01Icon, Tick02Icon } from '@hugeicons/core-free-icons'
-import { allWork, contactLinks, intro, learningWall, now, profile } from './content'
+import { allWork, bioProjectLinks, contactLinks, intro, learningWall, now, profile } from './content'
 import { workGroups } from './work'
 import repositories from './repositories.json'
+import bioTokens from './bio-tokens.json'
 
 const normalizePath = (path) => {
   if (!path || path === '/') {
@@ -139,13 +140,12 @@ function WorkFilters({ value, onChange, resultsId }) {
   )
 }
 
-function NowList() {
-  const [filter, setFilter] = useState(() => window.location.pathname === '/work' || window.location.hash.startsWith('#work-') ? 'all' : 'featured')
+function NowList({ filter, onFilterChange }) {
   const items = matchingWork(filter)
   return (
     <section className="now-section" aria-label="selected work">
       <div className="home-work-heading"><h2 className="now-heading">work</h2></div>
-      <WorkFilters value={filter} onChange={setFilter} resultsId="home-work-results" />
+      <WorkFilters value={filter} onChange={onFilterChange} resultsId="home-work-results" />
       <p className="visually-hidden" role="status">{items.length} {items.length === 1 ? 'entry' : 'entries'} · {workFilters.find(item => item.id === filter).label}</p>
       <WorkRows items={items} id="home-work-results" />
     </section>
@@ -171,12 +171,54 @@ function RepositoryArchive() {
   )
 }
 
-function About() {
+const bioPhrasePattern = new RegExp(`\\b(${bioProjectLinks.map(link => link.phrase).sort((a, b) => b.length - a.length).join('|')})\\b`, 'gi')
+const bioLinkRanges = Array.from(bioTokens.source.matchAll(bioPhrasePattern), match => ({
+  ...bioProjectLinks.find(link => link.phrase === match[0].toLowerCase()),
+  start: match.index,
+  end: match.index + match[0].length,
+}))
+const bioTokenGroups = bioTokens.tokens.reduce((groups, token, index) => {
+  const range = bioLinkRanges.find(link => token.start < link.end && token.end > link.start)
+  const previous = groups.at(-1)
+  if (range && previous?.rangeStart === range.start) previous.tokens.push({ ...token, index })
+  else groups.push({ project: range?.project, rangeStart: range?.start, tokens: [{ ...token, index }] })
+  return groups
+}, [])
+
+function BioToken({ token }) {
+  return <span className={`bio-token token-color-${token.index % 5}`} data-token-id={token.id} title={`token ${token.id} · ${JSON.stringify(token.text)}`}>{token.text}</span>
+}
+
+function TokenBio({ onProjectSelect }) {
+  return <p className="token-stream">{bioTokenGroups.map(group => {
+    const key = group.tokens[0].start
+    const tokens = group.tokens.map(token => <BioToken key={token.start} token={token} />)
+    if (!group.project) return tokens
+    const project = allWork.find(item => item.id === group.project)
+    return <a key={key} className="bio-token-link" href={`/#work-${group.project}`} title={`open ${project.name}`} aria-label={`${group.tokens.map(token => token.text).join('').trim()} (open ${project.name} project)`} onClick={event => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+      onProjectSelect(group.project)
+      const target = document.getElementById(`work-${group.project}`)
+      if (target) target.querySelector('details').open = true
+    }}>{tokens}</a>
+  })}</p>
+}
+
+function ProfileIntro({ onProjectSelect }) {
+  const [showTokens, setShowTokens] = useState(false)
   return (
-    <details className="home-about" id="about">
-      <summary><span>a little about me</span><HugeiconsIcon icon={ArrowDown01Icon} size={16} strokeWidth={1.6} className="archive-chevron" aria-hidden="true" /></summary>
-      <div className="intro-copy"><RichParagraphs paragraphs={intro} /></div>
-    </details>
+    <header className="hero-header home-about bio-section" id="about">
+      <div className="profile-heading">
+        <h1>{profile.name}</h1>
+        <div className="bio-view-switch" role="group" aria-label="biography view">
+          <button type="button" aria-pressed={!showTokens} aria-controls="bio-copy" onClick={() => setShowTokens(false)}>text</button>
+          <span aria-hidden="true">/</span>
+          <button type="button" aria-pressed={showTokens} aria-controls="bio-copy" onClick={() => setShowTokens(true)}>tokens</button>
+        </div>
+      </div>
+      {showTokens ? <p className="bio-view-hint" title={`${bioTokens.encoding} · ${bioTokens.generator}`}>{bioTokens.tokens.length} GPT tokens · underlined phrases open projects</p> : null}
+      <div className={`intro-copy ${showTokens ? 'token-bio' : 'bio-note'}`} id="bio-copy">{showTokens ? <TokenBio onProjectSelect={onProjectSelect} /> : <RichParagraphs paragraphs={intro} />}</div>
+    </header>
   )
 }
 
@@ -211,12 +253,22 @@ function App() {
   const [isPetting, setIsPetting] = useState(false)
   const [isReacting, setIsReacting] = useState(false)
   const [pathname, setPathname] = useState(() => normalizePath(window.location.pathname))
+  const [filter, setFilter] = useState(() => window.location.pathname === '/work' || window.location.hash.startsWith('#work-') ? 'all' : 'featured')
 
   const isLearningWall = learningPaths.includes(pathname)
 
   const togglePet = () => {
     setIsPetting((value) => !value)
     setIsReacting(true)
+  }
+
+  const changeFilter = value => {
+    if (window.location.hash.startsWith('#work-')) window.history.replaceState(null, '', window.location.pathname)
+    setFilter(value)
+  }
+
+  const selectBioProject = id => {
+    if (!document.getElementById(`work-${id}`)) setFilter('all')
   }
 
   useEffect(() => {
@@ -232,11 +284,16 @@ function App() {
       const disclosure = target.matches('details') ? target : target.querySelector('details')
       if (disclosure) disclosure.open = true
       target.scrollIntoView()
+      if (fragment.startsWith('work-')) target.querySelector('summary')?.focus({ preventScroll: true })
+    }
+    const handleHashChange = () => {
+      if (window.location.hash.startsWith('#work-') && !document.getElementById(window.location.hash.slice(1))) setFilter('all')
+      revealFragment()
     }
     revealFragment()
-    window.addEventListener('hashchange', revealFragment)
-    return () => window.removeEventListener('hashchange', revealFragment)
-  }, [pathname])
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [pathname, filter])
 
   useEffect(() => {
     const handlePopState = () => setPathname(normalizePath(window.location.pathname))
@@ -254,13 +311,9 @@ function App() {
       <main className="page">
         {isLearningWall ? <><nav className="notes-return" aria-label="site"><a href="/"><HugeiconsIcon icon={ArrowRight01Icon} size={13} strokeWidth={1.6} aria-hidden="true" />back home</a></nav><TopicWall /></> : (
         <section className="hero-section home-compact">
-          <header className="hero-header">
-            <h1>{profile.name}</h1>
-            <p className="home-tagline">founding engineer · apple platforms & ai</p>
-            <p className="home-building">currently co-founding <a className="inline-underline" href="https://www.gobeet.app/" target="_blank" rel="noreferrer">beet</a>, building across apps, ai & backend systems.</p>
-          </header>
-          <NowList />
-          <div className="home-supplement"><About /><RepositoryArchive /></div>
+          <ProfileIntro onProjectSelect={selectBioProject} />
+          <NowList filter={filter} onFilterChange={changeFilter} />
+          <div className="home-supplement"><RepositoryArchive /></div>
           <footer className="home-footer">
             <nav className="home-contact-links" aria-label="contact and more">
               <a href={learningWall.route}>notes</a>
