@@ -36,7 +36,7 @@ Update the copy in `src/content.js`:
 
 ## Portfolio homepage
 
-Current design baseline approved on 2026-11-05: preserve the visible written biography beneath the name, its small text/tokens switch, the compact lowercase layout, neutral filters with a sage selected border, inline project disclosures, and brief interaction feedback. Restore point: `portfolio-visible-bio-baseline-2026-11-05`. The earlier `portfolio-minimal-baseline-2026-11-05` tag preserves the previous design. Keep future visual experiments on a separate branch until requested for the main design.
+Current local baseline approved on 2026-11-06: preserve the visible written biography, its text/tokens switch, the two-font pairing (instrument sans and courier prime), the lowercase layout, sage filter borders, inline project disclosures, and the realistic panda's walking/resting/bamboo behaviors. Restore point: `portfolio-panda-baseline-2026-11-06`. Earlier baseline tags preserve previous designs. Keep future visual experiments on a separate branch until requested. This local baseline has not been published.
 
 The text-first homepage is the complete portfolio. The short biography is visible directly beneath the name, with a small text/tokens switch. Project rows expand in place to show attribution, the full description, and a public destination when one is available. The searchable code archive is a collapsible section below the list. Notes live at `/wall` and are linked from the footer.
 
@@ -64,3 +64,7 @@ Open source is an overlapping facet: it includes work entries with a verified pu
 The approved visible biography has an optional token view. Its boundaries and IDs come from OpenAI's Python `tiktoken` library using `o200k_base`, encoded across the complete biography including paragraph separators. Phrase links wrap consecutive tokens without merging or recoloring token boundaries. All token colors are scoped to the biography; plain text remains the default.
 
 The generated `src/bio-tokens.json` ships only the small bio token sequence, not the tokenizer vocabulary. Builds verify it still matches `intro` and reconstructs the original text. After editing the bio, install `scripts/requirements-tokenizer.txt` in a Python environment and run `npm run tokenize:bio`. Ordinary builds require only Node and the checked-in token data. Hovering a token shows its ID.
+
+### Panda character
+
+`src/PandaPet.jsx` and `src/PandaPet.css` animate six generated, fur-textured giant-panda poses from `public/panda-realistic-walk.png`. The panda walks on four paws and turns at the screen edges. After roughly half a minute it lowers itself, sits for a short rest, eats bamboo, stands, and resumes its paused walking path. Clicking it offers bamboo immediately. Sitting, blinking, eating, and rising poses come from `public/panda-realistic-behaviors.png`; natural pauses vary slightly between cycles. Its fixed bottom position is exactly zero; per-frame crop offsets align the weight-bearing paws directly with the viewport's bottom edge, without a bottom margin or padding. The source sprite sheet stays unmodified. Sizing and travel duration adapt to viewport width, and reduced-motion preferences show a stationary pose. This version is committed locally and has not been published.

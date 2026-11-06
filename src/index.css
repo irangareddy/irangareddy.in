@@ -1,4 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=DM+Sans:wght@500;700&family=Instrument+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap');
+
+/* Courier Prime regular, served locally for the bio typography trial. */
+@font-face {
+  font-family: 'Courier Prime';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/courier-prime/regular-latin.woff2') format('woff2');
+}
 
 :root {
   --bg: #1f1f22;
@@ -9,9 +18,8 @@
   --line: rgba(202, 203, 212, 0.55);
   --line-soft: rgba(202, 203, 212, 0.28);
   --shadow: 0 30px 90px rgba(0, 0, 0, 0.34);
-  --display: 'DM Sans', 'Segoe UI', sans-serif;
-  --body: 'Instrument Sans', 'Segoe UI', sans-serif;
-  --hand: 'Caveat', cursive;
+  --body: 'Instrument Sans', sans-serif;
+  --bio: 'Courier Prime', monospace;
   color: var(--text);
   background:
     radial-gradient(circle at 50% 110%, rgba(89, 89, 96, 0.24), transparent 34%),
@@ -35,7 +43,7 @@ html {
 
 body {
   margin: 0;
-  min-width: 320px;
+  min-width: 0;
 }
 
 body::before {
@@ -188,7 +196,7 @@ p {
 }
 
 .hero-header h1 {
-  font-family: var(--display);
+  font-family: var(--body);
   font-size: clamp(2.45rem, 6vw, 3.2rem);
   line-height: 0.98;
   letter-spacing: -0.05em;
@@ -264,7 +272,7 @@ p {
 
 .wall-link,
 .wall-separator {
-  font-family: var(--display);
+  font-family: var(--body);
   font-size: clamp(2.15rem, 5.5vw, 4.35rem);
   line-height: 0.98;
   letter-spacing: -0.065em;
@@ -353,7 +361,7 @@ p {
   align-items: center;
   gap: 0.2rem;
   color: var(--muted);
-  font-family: var(--hand);
+  font-family: var(--bio);
   font-size: 1.3rem;
   transform: translateY(0.05rem) rotate(-3deg);
 }
@@ -398,7 +406,7 @@ p {
 .footer-note {
   max-width: 9rem;
   color: var(--muted);
-  font-family: var(--hand);
+  font-family: var(--bio);
   font-size: 1rem;
   line-height: 1.08;
   text-align: center;
@@ -486,7 +494,7 @@ p {
 
 .now-heading {
   margin: 0 0 0.6rem;
-  font-family: var(--hand);
+  font-family: var(--bio);
   font-size: 1.35rem;
   font-weight: 400;
   color: var(--muted);
@@ -545,7 +553,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .work-index-link a { color: var(--text); }
 .work-status { display: block; color: var(--muted); font-size: .68rem; line-height: 1.5; margin-top: .18rem; }
 .work-index { width: min(100%, 40rem); margin: 3.5rem auto 2rem; }
-.work-index-header h1 { font-family: var(--display); font-size: clamp(2rem, 5vw, 2.8rem); letter-spacing: -.045em; line-height: 1.1; }
+.work-index-header h1 { font-family: var(--body); font-size: clamp(2rem, 5vw, 2.8rem); letter-spacing: -.045em; line-height: 1.1; }
 .work-index-header > p { color: var(--muted); margin-top: 1.2rem; font-size: .95rem; }
 .work-jump-links { display: flex; flex-wrap: wrap; gap: .5rem 1.3rem; margin-top: 1.5rem; font-size: .75rem; color: var(--muted); }
 .work-jump-links a { padding-block: .2rem; }
@@ -554,7 +562,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .work-group .now-heading { margin-bottom: 1rem; }
 .now-name { overflow-wrap: anywhere; }
 .repository-archive { border-top: 1px solid var(--line-soft); margin-top: 3rem; padding-top: 1.4rem; }
-.repository-archive > summary { cursor: pointer; font-family: var(--hand); font-size: 1.3rem; color: var(--muted); }
+.repository-archive > summary { cursor: pointer; font-family: var(--bio); font-size: 1.3rem; color: var(--muted); }
 .archive-intro { color: var(--muted); font-size: .82rem; margin-top: 1rem; line-height: 1.65; }
 .repository-search { display: block; font-size: .75rem; color: var(--muted); margin-top: 1.5rem; }
 .repository-search input { width: 100%; margin-top: .45rem; padding: .7rem .8rem; color: var(--text); font: inherit; font-size: .9rem; background: transparent; border: 1px solid var(--line-soft); border-radius: 0; }
@@ -563,7 +571,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .repository-count { color: var(--muted); font-size: .72rem; margin-block: .8rem 1rem; }
 .repository-list { list-style: none; margin: 0; padding: 0; font-size: .8rem; }
 .repository-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; padding-block: .55rem; border-bottom: 1px solid rgba(202, 203, 212, .1); }
-.repository-list a { overflow-wrap: anywhere; }
+.repository-list a { font-family: var(--bio); font-size: .85rem; overflow-wrap: anywhere; }
 .repository-list li > span { color: var(--muted); font-size: .7rem; text-align: right; }
 .work-return { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
 @media (max-width: 640px) {
@@ -598,7 +606,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .home-compact .hero-header h1 { font-size: 1.6rem; line-height: 1.2; letter-spacing: -.035em; font-weight: 500; }
 .home-tagline { font-size: .83rem; color: var(--muted); line-height: 1.6; }
 .home-work-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: .55rem; }
-.home-work-heading .now-heading { font-size: 1.15rem; margin: 0; }
+.home-work-heading .now-heading { font-family: var(--bio); font-size: .95rem; font-weight: 400; margin: 0; }
 .home-work-heading > a { font-size: .69rem; color: var(--muted); }
 .home-work-heading > a:hover { color: var(--text); }
 .home-compact .work-filters { margin-top: 0; column-gap: .25rem; }
@@ -614,7 +622,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .home-contact-links a:hover { color: var(--text); }
 .home-pet { display: flex; align-items: center; gap: .55rem; }
 .home-pet .pet-button { width: 44px; height: 44px; padding: 6px; flex-shrink: 0; }
-.home-pet-status { color: var(--muted); font-family: var(--hand); font-size: .9rem; white-space: nowrap; }
+.home-pet-status { color: var(--muted); font-family: var(--bio); font-size: .9rem; white-space: nowrap; }
 .work-context { margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid var(--line-soft); scroll-margin-top: 1.5rem; }
 .work-context .intro-copy { font-size: .85rem; color: var(--muted); }
 @media (max-width:640px) {
@@ -673,7 +681,7 @@ a:focus-visible, a:focus-visible > .link-arrow, .work-chip:focus-visible .work-c
 .project-item { min-width: 0; scroll-margin-top: 1.5rem; }
 .project-summary { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 1.1rem; align-items: baseline; min-height: 44px; padding-block: .55rem; list-style: none; cursor: pointer; }
 .project-summary::-webkit-details-marker { display: none; }
-.project-name { color: #d9d9df; overflow-wrap: anywhere; transition: color 150ms ease-out; }
+.project-name { font-family: var(--bio); font-size: .9rem; color: #d9d9df; overflow-wrap: anywhere; transition: color 150ms ease-out; }
 .project-chevron { display: inline-block; vertical-align: -.1em; margin-left: .4rem; opacity: .35; transition: transform 160ms ease-out, opacity 150ms ease-out; }
 .project-summary:hover .project-name, .project-summary:focus-visible .project-name, .project-disclosure[open] .project-name { color: var(--text); }
 .project-summary:hover .project-chevron, .project-summary:focus-visible .project-chevron, .project-disclosure[open] .project-chevron { opacity: 1; }
@@ -682,7 +690,7 @@ a:focus-visible, a:focus-visible > .link-arrow, .work-chip:focus-visible .work-c
 .project-expanded { margin: .15rem 0 1rem 9.6rem; color: var(--muted); font-size: .82rem; line-height: 1.7; }
 .project-expanded .work-status { margin: 0 0 .4rem; font-size: .65rem; }
 .project-technologies { display: flex; flex-wrap: wrap; gap: .35rem; list-style: none; margin: .8rem 0 0; padding: 0; }
-.project-technologies li { border: 1px solid rgba(202,203,212,.18); border-radius: 4px; padding: .12rem .4rem; font: .65rem/1.5 ui-monospace, 'SFMono-Regular', Consolas, monospace; color: var(--muted); }
+.project-technologies li { border: 1px solid rgba(202,203,212,.18); border-radius: 4px; padding: .12rem .4rem; font: .75rem/1.5 var(--bio); color: var(--muted); }
 .project-destination { display: inline-block; margin-top: .65rem; color: var(--text); font-size: .72rem; }
 .project-destination .link-arrow { opacity: .65; transform: none; }
 .project-destination:hover .external-arrow { opacity: 1; transform: translate(1px, -1px); }
@@ -728,13 +736,13 @@ a:focus-visible, a:focus-visible > .link-arrow, .work-chip:focus-visible .work-c
 .bio-view-switch button[aria-pressed="true"] { text-decoration: underline; text-underline-offset: .3rem; text-decoration-color: var(--accent-line); }
 .bio-view-switch > span { font-size: .6rem; opacity: .45; }
 .home-about .bio-view-hint { color: var(--muted); font-size: .62rem; margin: .4rem 0 .8rem; }
-.home-about .bio-note { gap: 0; padding: .3rem 0 0; margin: .3rem 0 0; }
-.home-about .bio-note p:first-child { font-size: 1.1rem; line-height: 1.5; font-weight: 400; letter-spacing: -.02em; color: var(--text); }
+.home-about .bio-note { gap: 0; padding: .3rem 0 0; margin: .3rem 0 0; font-family: var(--bio); }
+.home-about .bio-note p:first-child { font-size: 1.1rem; line-height: 1.5; font-weight: 400; letter-spacing: 0; color: var(--text); }
 .bio-note p:first-child > span { display: block; }
-.home-about .bio-note p:nth-child(2) { max-width: 36rem; margin-top: 1.1rem; font-size: .85rem; line-height: 1.8; }
-.home-about .bio-note p:last-child { margin-top: 1.35rem; font-size: .82rem; line-height: 1.7; color: var(--muted); }
+.home-about .bio-note p:nth-child(2) { max-width: 36rem; margin-top: 1.1rem; font-size: 1rem; line-height: 1.7; }
+.home-about .bio-note p:last-child { margin-top: 1.35rem; font-size: .88rem; line-height: 1.7; color: var(--muted); }
 .bio-note p:last-child > span { display: block; }
-.home-about .token-bio { font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace; font-size: .78rem; line-height: 2.1; color: #f2eef5; }
+.home-about .token-bio { font-family: var(--bio); font-size: .88rem; line-height: 2.1; color: #f2eef5; }
 .token-bio .token-stream { white-space: pre-wrap; overflow-wrap: anywhere; }
 .token-bio .bio-token { padding: .08em 0; border-radius: 0; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .token-bio .token-color-0 { background: rgba(123,78,190,.52); }
@@ -749,7 +757,7 @@ a:focus-visible, a:focus-visible > .link-arrow, .work-chip:focus-visible .work-c
 @media (max-width:640px) {
   .bio-view-switch button { min-height: 44px; padding-inline: .4rem; }
   .home-about .bio-note p:first-child { font-size: 1.05rem; }
-  .home-about .bio-note p:nth-child(2) { font-size: .83rem; }
+  .home-about .bio-note p:nth-child(2) { font-size: 1rem; }
   .home-about .bio-view-hint { font-size: .6rem; }
-  .home-about .token-bio { font-size: .75rem; }
+  .home-about .token-bio { font-size: .9rem; }
 }

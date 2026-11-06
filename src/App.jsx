@@ -5,6 +5,7 @@ import { allWork, bioProjectLinks, contactLinks, intro, learningWall, now, profi
 import { workGroups } from './work'
 import repositories from './repositories.json'
 import bioTokens from './bio-tokens.json'
+import PandaPet from './PandaPet'
 
 const normalizePath = (path) => {
   if (!path || path === '/') {
@@ -250,17 +251,10 @@ function EmailContact() {
 }
 
 function App() {
-  const [isPetting, setIsPetting] = useState(false)
-  const [isReacting, setIsReacting] = useState(false)
   const [pathname, setPathname] = useState(() => normalizePath(window.location.pathname))
   const [filter, setFilter] = useState(() => window.location.pathname === '/work' || window.location.hash.startsWith('#work-') ? 'all' : 'featured')
 
   const isLearningWall = learningPaths.includes(pathname)
-
-  const togglePet = () => {
-    setIsPetting((value) => !value)
-    setIsReacting(true)
-  }
 
   const changeFilter = value => {
     if (window.location.hash.startsWith('#work-')) window.history.replaceState(null, '', window.location.pathname)
@@ -321,12 +315,7 @@ function App() {
               {contactLinks.filter(link => ['github', 'linkedin'].includes(link.label)).map(link => <a key={link.label} href={link.href} target="_blank" rel="noreferrer">{link.label}</a>)}
               <a href="https://blog.irangareddy.in" target="_blank" rel="noreferrer">blog</a>
             </nav>
-            <div className="home-pet">
-              <span className="home-pet-status" role="status">{isPetting ? 'thank you' : ''}</span>
-              <button type="button" className={`pet-button${isReacting ? ' reacting' : ''}`} onClick={togglePet} onAnimationEnd={() => setIsReacting(false)} aria-label="pet the cat" aria-pressed={isPetting}>
-                <img src="/panda-pet.svg" alt="" className="pet-icon" width="32" height="32" />
-              </button>
-            </div>
+            <PandaPet />
           </footer>
         </section>
         )}

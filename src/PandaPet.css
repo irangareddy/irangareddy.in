@@ -1,0 +1,36 @@
+/* Unmodified generated sprite atlases. Crop offsets place each pose's lowest
+   solid paw/haunch pixels on the viewport bottom, including during breaks. */
+.panda-pet { --panda-size: clamp(112px, 9vw, 146px); position: fixed; bottom: 0; left: calc(100% - var(--panda-size)); width: var(--panda-size); z-index: 40; animation: panda-roam var(--roam-duration) linear infinite; }
+.panda-button { position: relative; display: block; width: var(--panda-size); height: calc(var(--panda-size) * .5859375); margin: 0; padding: 0; border: 0; border-radius: 8px; background: none; color: var(--text); cursor: pointer; -webkit-tap-highlight-color: transparent; transition: height 200ms ease-out; }
+.panda-facing { position: absolute; inset: 0; display: block; animation: panda-turn var(--roam-duration) steps(1, end) infinite; }
+.panda-pose { position: absolute; bottom: 0; left: 0; display: block; width: 100%; background-repeat: no-repeat; transition: opacity 180ms ease-out; }
+.panda-walk-sprite { height: calc(var(--panda-size) * .5859375); background-image: url('/panda-realistic-walk.png'); background-size: 300% 341.333333%; background-position: 0% 16.712707%; animation: panda-frames 1.15s steps(1, end) infinite; }
+.panda-rest-sprite { height: calc(var(--panda-size) * .83984375); background-image: url('/panda-realistic-behaviors.png'); background-size: 300% 238.139535%; background-position: 50% 7.40740741%; opacity: 0; }
+.panda-pet:not([data-activity="walking"]), .panda-pet:not([data-activity="walking"]) .panda-facing, .panda-pet:not([data-activity="walking"]) .panda-walk-sprite { animation-play-state: paused; }
+.panda-pet:not([data-activity="walking"]) .panda-button { height: calc(var(--panda-size) * .83984375); }
+.panda-pet:not([data-activity="walking"]) .panda-walk-sprite { opacity: 0; }
+.panda-pet:not([data-activity="walking"]) .panda-rest-sprite { opacity: 1; }
+.panda-pet[data-activity="lowering"] .panda-rest-sprite { background-position: 0% 6.73400673%; }
+.panda-pet[data-activity="sitting"] .panda-rest-sprite { animation: panda-sit-blink 6.8s steps(1, end) infinite; }
+.panda-pet[data-activity="eating"] .panda-rest-sprite { animation: panda-chew 1.6s steps(1, end) infinite; }
+.panda-pet[data-activity="standing"] .panda-rest-sprite { background-position: 100% 92.25589226%; }
+.panda-feedback { position: absolute; bottom: 100%; left: 0; color: #bfd4ac; font: .7rem/1.5 var(--bio); white-space: nowrap; pointer-events: none; }
+@keyframes panda-roam { 0%, 100% { left: 0; } 50% { left: calc(100% - var(--panda-size)); } }
+@keyframes panda-turn { 0% { transform: scaleX(1); } 50% { transform: scaleX(-1); } }
+@keyframes panda-frames {
+  0% { background-position: 0% 16.712707%; }
+  16.666667% { background-position: 50% 16.712707%; }
+  33.333333% { background-position: 100% 16.850829%; }
+  50% { background-position: 0% 87.707182%; }
+  66.666667% { background-position: 50% 87.569061%; }
+  83.333333% { background-position: 100% 87.707182%; }
+}
+@keyframes panda-sit-blink { 0%, 45%, 49%, 100% { background-position: 50% 7.40740741%; } 47% { background-position: 100% 7.40740741%; } }
+@keyframes panda-chew { 0%, 100% { background-position: 0% 93.26599327%; } 50% { background-position: 50% 93.26599327%; } }
+@media (prefers-reduced-motion: reduce) {
+  .panda-pet, .panda-pet * { animation: none !important; transition: none !important; }
+  .panda-pet .panda-button { height: calc(var(--panda-size) * .83984375); }
+  .panda-pet .panda-walk-sprite { opacity: 0; }
+  .panda-pet .panda-rest-sprite { opacity: 1; background-position: 50% 7.40740741%; }
+  .panda-pet[data-activity="eating"] .panda-rest-sprite { background-position: 0% 93.26599327%; }
+}
