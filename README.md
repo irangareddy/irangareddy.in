@@ -22,7 +22,7 @@ Update the copy in `src/content.js`:
 
 - name and email
 - intro paragraphs
-- work and notebook cards
+- featured work and wall topics
 - contact links
 
 ## Deploy to Vercel
@@ -32,3 +32,27 @@ Update the copy in `src/content.js`:
 3. Vercel will detect Vite automatically.
 4. Use `npm run build` as the build command if you want to override defaults.
 5. Deploy.
+
+
+## Portfolio homepage
+
+Design baseline approved on 2026-11-05: preserve the compact, lowercase, text-first homepage, neutral filters with a sage selected border, inline project disclosures, and brief interaction feedback. Keep future visual experiments on a separate branch until requested for the main design.
+
+The text-first homepage is the complete portfolio. Project rows expand in place to show attribution, the full description, and a public destination when one is available. The biography and searchable code archive are collapsible sections below the list. Notes live at `/wall` and are linked from the footer.
+
+- `src/work.js`: grouped work entries, with team/prototype/coursework attribution and public links.
+- `src/content.js`: biography and featured entries selected from the complete work record.
+- `src/repositories.json`: public GitHub repository snapshot from November 2026. Forks are marked; no private repository metadata is included.
+
+The archive includes learning repositories and tutorials. Its repository count is not a shipped-product count. The candidate authorized naming and linking Beet on 2026-11-05. Keep client details and private repository URLs out of public content. Do not update LinkedIn without a separate request.
+
+
+### In-place work filters
+
+The homepage defaults to Featured. All includes every documented work entry. Category chips and the Open source filter update the homepage list in place.
+
+Muted sage (`#B8C7B2`) marks only the selected filter's border and successful email-copy checkmark. Technology labels stay neutral and appear inside expanded project details. `technologies` in `src/work.js` records stacks supported by the project description or verified career master; omit labels when the stack is not documented.
+
+Old `/work` URLs resolve to the homepage; project fragments select the full list and open the matching entry. The old `/work#context` URL opens the biography. Email can be opened normally or copied with the adjacent button, which confirms success or displays the address if clipboard access fails. Icons use Hugeicons' free Stroke Rounded set through `@hugeicons/react`. Filters update immediately; only their surface, link arrows, disclosure chevrons, and the cat respond with brief feedback. Keyboard link feedback is immediate, and `prefers-reduced-motion` disables animation and transitions.
+
+Open source is an overlapping facet: it includes work entries with a verified public repository and an identified MIT or Apache-2.0 license in the November 2026 review. A public GitHub URL alone does not set the flag. Update `openSource` and `license` in `src/work.js` when licensing changes. The 124-repository archive remains separate and includes clearly marked forks and learning repositories.

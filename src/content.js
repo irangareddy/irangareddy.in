@@ -1,3 +1,5 @@
+import { workGroups } from './work'
+
 export const profile = {
   name: 'ranga reddy nukala',
   email: 'sairangareddy22@gmail.com',
@@ -6,42 +8,20 @@ export const profile = {
 
 export const intro = [
   [
-    { text: "i'm a product engineer: jack of all trades, master of apple platforms. i ship across ios, web, backend, and ai, and go deepest on apple. two-time apple swift student challenge winner." },
+    { text: "i'm a founding engineer in san francisco, working across ai, apps, and backend systems. my roots are in apple platforms." },
   ],
   [
-    { text: 'i build things for the internet and keep returning to ideas that feel a little too ambitious at first.' },
+    { text: "currently co-founding beet, where i own the apps, backend api, llm event pipeline, and releases. elsewhere, i work on speech models, on-device inference, and interfaces that connect people to robots." },
   ],
   [
-    { text: 'most of my work lives somewhere between software, research, and curiosity, usually with a bias toward shipping.' },
+    { text: 'two-time apple swift student challenge winner. m.s. in applied data intelligence from san josé state, 2026.' },
   ],
 ]
 
-// Every fact here must match ~/Career/Resume/Format/master.tex (verified 2026-10-06).
-export const now = [
-  {
-    name: 'stealth startup',
-    detail: 'co-founding. a consumer app, 35 app store releases in.',
-  },
-  {
-    name: 'wishper',
-    href: 'https://github.com/irangareddy/wishper-app',
-    detail: 'on-device dictation for mac. ~26× faster than real time on an m4.',
-  },
-  {
-    name: 'go2-sparky',
-    href: 'https://pypi.org/project/go2-sparky/',
-    detail: 'control library for the unitree go2 robot dog, driven by vision pro hand tracking.',
-  },
-  {
-    name: 'boreas',
-    detail: 'neural surrogates for data-center cooling. semi-therm 2027 submission.',
-  },
-  {
-    name: 'dew',
-    href: 'https://apps.apple.com/app/id6470129770',
-    detail: 'a daily wisdom app, on the app store since 2023.',
-  },
-]
+// Selected public facts from the verified career record. Preserve team attribution,
+// benchmark conditions and client confidentiality. Beet naming authorized on 2026-11-05.
+export const allWork = workGroups.flatMap(group => group.items)
+export const now = ["startup", "wishper", "voxe", "boreas", "go2", "plateplanner", "tiptapswift", "dew"].map(id => allWork.find(item => item.id === id))
 
 export const outro = [
   [
@@ -58,7 +38,7 @@ export const contactLinks = [
   {
     href: 'https://github.com/irangareddy',
     label: 'github',
-    detail: 'life monorepository',
+    detail: 'code and experiments',
   },
   {
     href: 'https://linkedin.com/in/irangareddy',

@@ -1,0 +1,746 @@
+[
+  {
+    "name": "100DaysOfSwiftUI",
+    "href": "https://github.com/irangareddy/100DaysOfSwiftUI",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "2020",
+    "href": "https://github.com/irangareddy/2020",
+    "language": "",
+    "fork": true
+  },
+  {
+    "name": "2021",
+    "href": "https://github.com/irangareddy/2021",
+    "language": "",
+    "fork": true
+  },
+  {
+    "name": "agents-elevenlabs",
+    "href": "https://github.com/irangareddy/agents-elevenlabs",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "agmail",
+    "href": "https://github.com/irangareddy/agmail",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "ailearninghub",
+    "href": "https://github.com/irangareddy/ailearninghub",
+    "language": "HTML",
+    "fork": true
+  },
+  {
+    "name": "Alternate-Icons-Flutter",
+    "href": "https://github.com/irangareddy/Alternate-Icons-Flutter",
+    "language": "Dart",
+    "fork": false
+  },
+  {
+    "name": "apple-configurator-sample",
+    "href": "https://github.com/irangareddy/apple-configurator-sample",
+    "language": "Swift",
+    "fork": true
+  },
+  {
+    "name": "Articles",
+    "href": "https://github.com/irangareddy/Articles",
+    "language": "",
+    "fork": false
+  },
+  {
+    "name": "autocomplete",
+    "href": "https://github.com/irangareddy/autocomplete",
+    "language": "TypeScript",
+    "fork": true
+  },
+  {
+    "name": "BetterRest",
+    "href": "https://github.com/irangareddy/BetterRest",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "blog.irangareddy.in",
+    "href": "https://github.com/irangareddy/blog.irangareddy.in",
+    "language": "HTML",
+    "fork": false
+  },
+  {
+    "name": "Book-Club",
+    "href": "https://github.com/irangareddy/Book-Club",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "Carbon-Footprint",
+    "href": "https://github.com/irangareddy/Carbon-Footprint",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "cmem-plugin-databus",
+    "href": "https://github.com/irangareddy/cmem-plugin-databus",
+    "language": "Python",
+    "fork": true
+  },
+  {
+    "name": "Color.Dev_UI",
+    "href": "https://github.com/irangareddy/Color.Dev_UI",
+    "language": "Swift",
+    "fork": true
+  },
+  {
+    "name": "Convertz",
+    "href": "https://github.com/irangareddy/Convertz",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "Cosmic",
+    "href": "https://github.com/irangareddy/Cosmic",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "CosyVoice",
+    "href": "https://github.com/irangareddy/CosyVoice",
+    "language": "Python",
+    "fork": true
+  },
+  {
+    "name": "Cup-Cakes",
+    "href": "https://github.com/irangareddy/Cup-Cakes",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "data-226-lab02",
+    "href": "https://github.com/irangareddy/data-226-lab02",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "DATA-226-Records",
+    "href": "https://github.com/irangareddy/DATA-226-Records",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "datasets-genie",
+    "href": "https://github.com/irangareddy/datasets-genie",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "dbpedia_vespa_data226_homework_9",
+    "href": "https://github.com/irangareddy/dbpedia_vespa_data226_homework_9",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "dbt_snowflake_data226_homework_8",
+    "href": "https://github.com/irangareddy/dbt_snowflake_data226_homework_8",
+    "language": "",
+    "fork": false
+  },
+  {
+    "name": "demand-forecasting-bigdata",
+    "href": "https://github.com/irangareddy/demand-forecasting-bigdata",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "dimeApp",
+    "href": "https://github.com/irangareddy/dimeApp",
+    "language": "Swift",
+    "fork": true
+  },
+  {
+    "name": "Docker-Kubernetes",
+    "href": "https://github.com/irangareddy/Docker-Kubernetes",
+    "language": "",
+    "fork": false
+  },
+  {
+    "name": "Drawing-SwiftUI",
+    "href": "https://github.com/irangareddy/Drawing-SwiftUI",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "DVWordKit",
+    "href": "https://github.com/irangareddy/DVWordKit",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "Dynamic-Icons-SwiftUI",
+    "href": "https://github.com/irangareddy/Dynamic-Icons-SwiftUI",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "Easy-Math",
+    "href": "https://github.com/irangareddy/Easy-Math",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "elevenlabs-swift-sdk",
+    "href": "https://github.com/irangareddy/elevenlabs-swift-sdk",
+    "language": "Swift",
+    "fork": true
+  },
+  {
+    "name": "F5-TTS",
+    "href": "https://github.com/irangareddy/F5-TTS",
+    "language": "Python",
+    "fork": true
+  },
+  {
+    "name": "Flutter-Apps",
+    "href": "https://github.com/irangareddy/Flutter-Apps",
+    "language": "Dart",
+    "fork": false
+  },
+  {
+    "name": "Flutter-Cloud-Firestore",
+    "href": "https://github.com/irangareddy/Flutter-Cloud-Firestore",
+    "language": "Dart",
+    "fork": false
+  },
+  {
+    "name": "Flutter-Firebase",
+    "href": "https://github.com/irangareddy/Flutter-Firebase",
+    "language": "Ruby",
+    "fork": false
+  },
+  {
+    "name": "flutter-packages",
+    "href": "https://github.com/irangareddy/flutter-packages",
+    "language": "Dart",
+    "fork": true
+  },
+  {
+    "name": "Flutter-UI-Components-Library",
+    "href": "https://github.com/irangareddy/Flutter-UI-Components-Library",
+    "language": "Dart",
+    "fork": false
+  },
+  {
+    "name": "Flutter7s",
+    "href": "https://github.com/irangareddy/Flutter7s",
+    "language": "Dart",
+    "fork": true
+  },
+  {
+    "name": "flutter_expandable_table",
+    "href": "https://github.com/irangareddy/flutter_expandable_table",
+    "language": "Dart",
+    "fork": true
+  },
+  {
+    "name": "FlutterDeveloper-CheckList",
+    "href": "https://github.com/irangareddy/FlutterDeveloper-CheckList",
+    "language": "",
+    "fork": false
+  },
+  {
+    "name": "FlutterFire-Auth",
+    "href": "https://github.com/irangareddy/FlutterFire-Auth",
+    "language": "Dart",
+    "fork": false
+  },
+  {
+    "name": "Friends-Face",
+    "href": "https://github.com/irangareddy/Friends-Face",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "frontier-challenges",
+    "href": "https://github.com/irangareddy/frontier-challenges",
+    "language": "Jupyter Notebook",
+    "fork": false
+  },
+  {
+    "name": "generative-ai-notes",
+    "href": "https://github.com/irangareddy/generative-ai-notes",
+    "language": "",
+    "fork": false
+  },
+  {
+    "name": "gh-project-board",
+    "href": "https://github.com/irangareddy/gh-project-board",
+    "language": "Shell",
+    "fork": false
+  },
+  {
+    "name": "git-working-policy",
+    "href": "https://github.com/irangareddy/git-working-policy",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "Guess-the-Flag",
+    "href": "https://github.com/irangareddy/Guess-the-Flag",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "HackerRank",
+    "href": "https://github.com/irangareddy/HackerRank",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "HPC-Lab-Scripts",
+    "href": "https://github.com/irangareddy/HPC-Lab-Scripts",
+    "language": "PowerShell",
+    "fork": false
+  },
+  {
+    "name": "huggingface-skills",
+    "href": "https://github.com/irangareddy/huggingface-skills",
+    "language": "Python",
+    "fork": true
+  },
+  {
+    "name": "iExpense",
+    "href": "https://github.com/irangareddy/iExpense",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "inpycon2023",
+    "href": "https://github.com/irangareddy/inpycon2023",
+    "language": "JavaScript",
+    "fork": true
+  },
+  {
+    "name": "InstaFilter",
+    "href": "https://github.com/irangareddy/InstaFilter",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "intl_phone_field",
+    "href": "https://github.com/irangareddy/intl_phone_field",
+    "language": "Dart",
+    "fork": true
+  },
+  {
+    "name": "iOS-Apps",
+    "href": "https://github.com/irangareddy/iOS-Apps",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "irangareddy",
+    "href": "https://github.com/irangareddy/irangareddy",
+    "language": "JavaScript",
+    "fork": false
+  },
+  {
+    "name": "irangareddy.in",
+    "href": "https://github.com/irangareddy/irangareddy.in",
+    "language": "JavaScript",
+    "fork": false
+  },
+  {
+    "name": "JavaScript",
+    "href": "https://github.com/irangareddy/JavaScript",
+    "language": "JavaScript",
+    "fork": false
+  },
+  {
+    "name": "junction",
+    "href": "https://github.com/irangareddy/junction",
+    "language": "Python",
+    "fork": true
+  },
+  {
+    "name": "kit-app-template",
+    "href": "https://github.com/irangareddy/kit-app-template",
+    "language": "Python",
+    "fork": true
+  },
+  {
+    "name": "Lab01",
+    "href": "https://github.com/irangareddy/Lab01",
+    "language": "Jupyter Notebook",
+    "fork": false
+  },
+  {
+    "name": "MakerMods-App",
+    "href": "https://github.com/irangareddy/MakerMods-App",
+    "language": "TypeScript",
+    "fork": true
+  },
+  {
+    "name": "ml-intern",
+    "href": "https://github.com/irangareddy/ml-intern",
+    "language": "Python",
+    "fork": true
+  },
+  {
+    "name": "ml-project-template",
+    "href": "https://github.com/irangareddy/ml-project-template",
+    "language": "Dockerfile",
+    "fork": false
+  },
+  {
+    "name": "ML-System-Design-Decoded",
+    "href": "https://github.com/irangareddy/ML-System-Design-Decoded",
+    "language": "",
+    "fork": true
+  },
+  {
+    "name": "mobile-before-and-after",
+    "href": "https://github.com/irangareddy/mobile-before-and-after",
+    "language": "",
+    "fork": false
+  },
+  {
+    "name": "modelhub",
+    "href": "https://github.com/irangareddy/modelhub",
+    "language": "Swift",
+    "fork": true
+  },
+  {
+    "name": "Mood-Map",
+    "href": "https://github.com/irangareddy/Mood-Map",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "mood-map-kit",
+    "href": "https://github.com/irangareddy/mood-map-kit",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "Moonshot",
+    "href": "https://github.com/irangareddy/Moonshot",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "Movie-Suggester",
+    "href": "https://github.com/irangareddy/Movie-Suggester",
+    "language": "Dart",
+    "fork": false
+  },
+  {
+    "name": "MyTrips",
+    "href": "https://github.com/irangareddy/MyTrips",
+    "language": "Swift",
+    "fork": true
+  },
+  {
+    "name": "neetcode-submissions",
+    "href": "https://github.com/irangareddy/neetcode-submissions",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "Networking",
+    "href": "https://github.com/irangareddy/Networking",
+    "language": "Swift",
+    "fork": true
+  },
+  {
+    "name": "networkx",
+    "href": "https://github.com/irangareddy/networkx",
+    "language": "Python",
+    "fork": true
+  },
+  {
+    "name": "numi",
+    "href": "https://github.com/irangareddy/numi",
+    "language": "JavaScript",
+    "fork": true
+  },
+  {
+    "name": "openclaw",
+    "href": "https://github.com/irangareddy/openclaw",
+    "language": "TypeScript",
+    "fork": true
+  },
+  {
+    "name": "openclaw-essentials",
+    "href": "https://github.com/irangareddy/openclaw-essentials",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "pandas-ai-101",
+    "href": "https://github.com/irangareddy/pandas-ai-101",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "petdex",
+    "href": "https://github.com/irangareddy/petdex",
+    "language": "TypeScript",
+    "fork": true
+  },
+  {
+    "name": "petdex-swift",
+    "href": "https://github.com/irangareddy/petdex-swift",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "phyai-data-pipeline",
+    "href": "https://github.com/irangareddy/phyai-data-pipeline",
+    "language": "Jupyter Notebook",
+    "fork": false
+  },
+  {
+    "name": "plate-planner-api",
+    "href": "https://github.com/irangareddy/plate-planner-api",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "privacy-policy-summarizer",
+    "href": "https://github.com/irangareddy/privacy-policy-summarizer",
+    "language": "",
+    "fork": false
+  },
+  {
+    "name": "ProbabilityKit",
+    "href": "https://github.com/irangareddy/ProbabilityKit",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "programmer-jokes",
+    "href": "https://github.com/irangareddy/programmer-jokes",
+    "language": "",
+    "fork": true
+  },
+  {
+    "name": "Purely-SwiftUI",
+    "href": "https://github.com/irangareddy/Purely-SwiftUI",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "PyCon_India_App",
+    "href": "https://github.com/irangareddy/PyCon_India_App",
+    "language": "Dart",
+    "fork": false
+  },
+  {
+    "name": "Pytest-Excercises",
+    "href": "https://github.com/irangareddy/Pytest-Excercises",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "python-in-action",
+    "href": "https://github.com/irangareddy/python-in-action",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "python-soql-parser",
+    "href": "https://github.com/irangareddy/python-soql-parser",
+    "language": "Python",
+    "fork": true
+  },
+  {
+    "name": "repo-ranger-bot",
+    "href": "https://github.com/irangareddy/repo-ranger-bot",
+    "language": "",
+    "fork": false
+  },
+  {
+    "name": "retail-demand-forecasting",
+    "href": "https://github.com/irangareddy/retail-demand-forecasting",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "retail-detail-sources",
+    "href": "https://github.com/irangareddy/retail-detail-sources",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "Rock-Paper-Scissor",
+    "href": "https://github.com/irangareddy/Rock-Paper-Scissor",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "roomie_tasks",
+    "href": "https://github.com/irangareddy/roomie_tasks",
+    "language": "Dart",
+    "fork": false
+  },
+  {
+    "name": "sparky",
+    "href": "https://github.com/irangareddy/sparky",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "SpeechMatchKit",
+    "href": "https://github.com/irangareddy/SpeechMatchKit",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "Spotify-UIKit",
+    "href": "https://github.com/irangareddy/Spotify-UIKit",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "Stacked",
+    "href": "https://github.com/irangareddy/Stacked",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "story",
+    "href": "https://github.com/irangareddy/story",
+    "language": "TypeScript",
+    "fork": false
+  },
+  {
+    "name": "swift",
+    "href": "https://github.com/irangareddy/swift",
+    "language": "Swift",
+    "fork": true
+  },
+  {
+    "name": "swift-algorithms",
+    "href": "https://github.com/irangareddy/swift-algorithms",
+    "language": "Swift",
+    "fork": true
+  },
+  {
+    "name": "SwiftLang-Playground",
+    "href": "https://github.com/irangareddy/SwiftLang-Playground",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "SwiftUI-Animations",
+    "href": "https://github.com/irangareddy/SwiftUI-Animations",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "SwiftUI-Trends",
+    "href": "https://github.com/irangareddy/SwiftUI-Trends",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "teaching-gemma-to-code",
+    "href": "https://github.com/irangareddy/teaching-gemma-to-code",
+    "language": "",
+    "fork": false
+  },
+  {
+    "name": "tiptap-compose",
+    "href": "https://github.com/irangareddy/tiptap-compose",
+    "language": "Kotlin",
+    "fork": false
+  },
+  {
+    "name": "tiptap-swift",
+    "href": "https://github.com/irangareddy/tiptap-swift",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "Todo-Flutter",
+    "href": "https://github.com/irangareddy/Todo-Flutter",
+    "language": "Dart",
+    "fork": false
+  },
+  {
+    "name": "Udder",
+    "href": "https://github.com/irangareddy/Udder",
+    "language": "Swift",
+    "fork": true
+  },
+  {
+    "name": "VLM-from-scratch",
+    "href": "https://github.com/irangareddy/VLM-from-scratch",
+    "language": "",
+    "fork": false
+  },
+  {
+    "name": "wagent",
+    "href": "https://github.com/irangareddy/wagent",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "WebDevelopment",
+    "href": "https://github.com/irangareddy/WebDevelopment",
+    "language": "HTML",
+    "fork": false
+  },
+  {
+    "name": "WebImage-SwiftUI",
+    "href": "https://github.com/irangareddy/WebImage-SwiftUI",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "WeSplit",
+    "href": "https://github.com/irangareddy/WeSplit",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "wishper",
+    "href": "https://github.com/irangareddy/wishper",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "wishper-app",
+    "href": "https://github.com/irangareddy/wishper-app",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "wishper-site",
+    "href": "https://github.com/irangareddy/wishper-site",
+    "language": "HTML",
+    "fork": false
+  },
+  {
+    "name": "Word-Scramble",
+    "href": "https://github.com/irangareddy/Word-Scramble",
+    "language": "Swift",
+    "fork": false
+  },
+  {
+    "name": "wwdc-community-events",
+    "href": "https://github.com/irangareddy/wwdc-community-events",
+    "language": "Python",
+    "fork": false
+  },
+  {
+    "name": "XcodeBuildMCP",
+    "href": "https://github.com/irangareddy/XcodeBuildMCP",
+    "language": "TypeScript",
+    "fork": true
+  }
+]

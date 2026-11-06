@@ -1,5 +1,9 @@
-import { useEffect, useState } from 'react'
-import { contactLinks, intro, learningWall, now, outro, profile } from './content'
+import { useEffect, useRef, useState } from 'react'
+import { HugeiconsIcon } from '@hugeicons/react'
+import { ArrowDown01Icon, ArrowRight01Icon, ArrowUpRight01Icon, Copy01Icon, Search01Icon, Tick02Icon } from '@hugeicons/core-free-icons'
+import { allWork, contactLinks, intro, learningWall, now, profile } from './content'
+import { workGroups } from './work'
+import repositories from './repositories.json'
 
 const normalizePath = (path) => {
   if (!path || path === '/') {
@@ -68,135 +72,209 @@ function RichParagraphs({ paragraphs, leadFirst = false }) {
   ))
 }
 
-function NowList() {
+function LinkArrow({ external = false }) {
+  return <HugeiconsIcon icon={external ? ArrowUpRight01Icon : ArrowRight01Icon} size={13} strokeWidth={1.6} className={`link-arrow${external ? ' external-arrow' : ''}`} aria-hidden="true" />
+}
+
+function projectLinkLabel(href) {
+  const host = new URL(href).hostname
+  if (host === 'github.com') return 'view code'
+  if (host === 'doi.org') return 'read paper'
+  if (host === 'apps.apple.com') return 'view app'
+  if (host === 'pypi.org') return 'view package'
+  if (host === 'youtu.be' || host === 'youtube.com') return 'watch demo'
+  return 'visit project'
+}
+
+function WorkRows({ items, id }) {
   return (
-    <section className="now-section" aria-label="now">
-      <h2 className="now-heading">now</h2>
-      <ul className="now-list">
-        {now.map((item) => (
-          <li key={item.name} className="now-item">
-            {item.href ? (
-              <a className="now-name inline-underline" href={item.href} target="_blank" rel="noreferrer">
-                {item.name}
-              </a>
-            ) : (
-              <span className="now-name">{item.name}</span>
-            )}
-            <span className="now-detail">{item.detail}</span>
-          </li>
-        ))}
-      </ul>
+    <ul className="now-list" id={id}>
+      {items.map(item => (
+        <li key={item.id} className="project-item" id={`work-${item.id}`}>
+          <details className="project-disclosure">
+            <summary className="project-summary">
+              <span className="project-name">{item.name}<HugeiconsIcon icon={ArrowDown01Icon} size={12} strokeWidth={1.6} className="project-chevron" aria-hidden="true" /></span>
+              <span className="now-detail">{item.summary}</span>
+            </summary>
+            <div className="project-expanded">
+              {item.status ? <p className="work-status">{item.status}</p> : null}
+              <p>{item.detail}</p>
+              {item.technologies?.length ? <ul className="project-technologies" aria-label="technologies">{item.technologies.map(technology => <li key={technology}>{technology}</li>)}</ul> : null}
+              {item.href ? <a className="project-destination inline-underline" href={item.href} target="_blank" rel="noreferrer">{projectLinkLabel(item.href)}<LinkArrow external /></a> : null}
+            </div>
+          </details>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+const workFilters = [
+  { id: 'featured', label: 'featured' },
+  { id: 'all', label: 'all' },
+  { id: 'apps', label: 'apps' },
+  { id: 'ai', label: 'ai' },
+  { id: 'open-source', label: 'open source' },
+  { id: 'libraries', label: 'libraries' },
+  { id: 'systems', label: 'systems' },
+  { id: 'professional', label: 'career' },
+]
+
+function matchingWork(filter) {
+  if (filter === 'featured') return now
+  if (filter === 'all') return allWork
+  if (filter === 'open-source') return allWork.filter(item => item.openSource)
+  return workGroups.find(group => group.id === filter)?.items ?? []
+}
+
+function WorkFilters({ value, onChange, resultsId }) {
+  return (
+    <div className="work-filters" role="group" aria-label="filter work">
+      {workFilters.map(filter => (
+        <button key={filter.id} type="button" className="work-chip" aria-pressed={value === filter.id} aria-controls={resultsId} onClick={() => onChange(filter.id)}>
+          <span className="work-chip-face">{filter.label}{filter.id === 'all' ? <span className="work-chip-count">{allWork.length}</span> : null}</span>
+        </button>
+      ))}
+    </div>
+  )
+}
+
+function NowList() {
+  const [filter, setFilter] = useState(() => window.location.pathname === '/work' || window.location.hash.startsWith('#work-') ? 'all' : 'featured')
+  const items = matchingWork(filter)
+  return (
+    <section className="now-section" aria-label="selected work">
+      <div className="home-work-heading"><h2 className="now-heading">work</h2></div>
+      <WorkFilters value={filter} onChange={setFilter} resultsId="home-work-results" />
+      <p className="visually-hidden" role="status">{items.length} {items.length === 1 ? 'entry' : 'entries'} · {workFilters.find(item => item.id === filter).label}</p>
+      <WorkRows items={items} id="home-work-results" />
     </section>
+  )
+}
+
+function RepositoryArchive() {
+  const [query, setQuery] = useState('')
+  const normalized = query.trim().toLowerCase()
+  const results = repositories.filter(repo => `${repo.name} ${repo.language} ${repo.fork ? 'fork' : ''}`.toLowerCase().includes(normalized))
+  return (
+    <details className="repository-archive" id="code-archive">
+      <summary><span>public code archive · {repositories.length} repositories</span><HugeiconsIcon icon={ArrowDown01Icon} size={16} strokeWidth={1.6} className="archive-chevron" aria-hidden="true" /></summary>
+      <p className="archive-intro">the longer trail: apps, tools, coursework, tutorials, and experiments. forks are marked; this is a repository index, not a list of shipped products. snapshot: november 2026.</p>
+      <label className="repository-search">find a repository
+        <span className="repository-search-field"><HugeiconsIcon icon={Search01Icon} size={17} strokeWidth={1.6} aria-hidden="true" /><input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="name or language" /></span>
+      </label>
+      <p className="repository-count" role="status">{results.length} of {repositories.length} repositories</p>
+      {results.length ? <ul className="repository-list">{results.map(repo => (
+        <li key={repo.name}><a className="inline-underline" href={repo.href} target="_blank" rel="noreferrer">{repo.name}</a><span>{[repo.language, repo.fork ? 'fork' : ''].filter(Boolean).join(' · ')}</span></li>
+      ))}</ul> : <p className="archive-intro">no matches. try a project name or a language such as swift or python.</p>}
+    </details>
+  )
+}
+
+function About() {
+  return (
+    <details className="home-about" id="about">
+      <summary><span>a little about me</span><HugeiconsIcon icon={ArrowDown01Icon} size={16} strokeWidth={1.6} className="archive-chevron" aria-hidden="true" /></summary>
+      <div className="intro-copy"><RichParagraphs paragraphs={intro} /></div>
+    </details>
+  )
+}
+
+function EmailContact() {
+  const [state, setState] = useState('idle')
+  const resetTimer = useRef(null)
+  useEffect(() => () => window.clearTimeout(resetTimer.current), [])
+
+  const copyEmail = async () => {
+    window.clearTimeout(resetTimer.current)
+    try {
+      await navigator.clipboard.writeText(profile.email)
+      setState('copied')
+      resetTimer.current = window.setTimeout(() => setState('idle'), 2500)
+    } catch {
+      setState('failed')
+    }
+  }
+
+  return (
+    <span className="email-contact">
+      <a href={`mailto:${profile.email}`}>email</a>
+      <button type="button" className={`copy-email${state === 'copied' ? ' copied' : ''}`} onClick={copyEmail} aria-label={state === 'copied' ? 'email copied' : 'copy email address'}>
+        <HugeiconsIcon icon={state === 'copied' ? Tick02Icon : Copy01Icon} size={13} strokeWidth={1.6} aria-hidden="true" />
+      </button>
+      <span className={state === 'idle' ? 'visually-hidden' : 'email-copy-feedback'} role="status">{state === 'copied' ? 'copied' : state === 'failed' ? `copy unavailable: ${profile.email}` : ''}</span>
+    </span>
   )
 }
 
 function App() {
   const [isPetting, setIsPetting] = useState(false)
-  const [isSpinning, setIsSpinning] = useState(false)
+  const [isReacting, setIsReacting] = useState(false)
   const [pathname, setPathname] = useState(() => normalizePath(window.location.pathname))
 
   const isLearningWall = learningPaths.includes(pathname)
 
   const togglePet = () => {
     setIsPetting((value) => !value)
-    setIsSpinning(true)
+    setIsReacting(true)
   }
 
   useEffect(() => {
-    const handlePopState = () => {
-      setPathname(normalizePath(window.location.pathname))
+    if (window.location.pathname === '/work') {
+      const hash = window.location.hash === '#context' ? '#about' : window.location.hash === '#work-index-title' ? '' : window.location.hash
+      window.history.replaceState(null, '', `/${hash}`)
     }
+    const revealFragment = () => {
+      const fragment = window.location.hash.slice(1)
+      if (!fragment) return
+      const target = document.getElementById(fragment)
+      if (!target) return
+      const disclosure = target.matches('details') ? target : target.querySelector('details')
+      if (disclosure) disclosure.open = true
+      target.scrollIntoView()
+    }
+    revealFragment()
+    window.addEventListener('hashchange', revealFragment)
+    return () => window.removeEventListener('hashchange', revealFragment)
+  }, [pathname])
 
-    document.title = isLearningWall ? 'wall | ranga reddy nukala' : 'ranga reddy nukala · product engineer'
+  useEffect(() => {
+    const handlePopState = () => setPathname(normalizePath(window.location.pathname))
+    document.title = isLearningWall ? 'notes | ranga reddy nukala' : 'ranga reddy nukala · founding engineer'
     window.addEventListener('popstate', handlePopState)
-
     return () => window.removeEventListener('popstate', handlePopState)
   }, [isLearningWall])
 
   return (
-    <div className={`page-shell${isLearningWall ? ' wall-mode' : ''}`}>
+    <div className={`page-shell${isLearningWall ? ' wall-mode' : ' home-mode'}`}>
       <div className="ambient ambient-primary" aria-hidden="true" />
       <div className="ambient ambient-left" aria-hidden="true" />
       <div className="ambient ambient-right" aria-hidden="true" />
 
       <main className="page">
-        <nav className="page-nav" aria-label="site">
-          <a className={`nav-link${!isLearningWall ? ' active' : ''}`} href="/">
-            home
-          </a>
-          <a className={`nav-link${isLearningWall ? ' active' : ''}`} href={learningWall.route}>
-            wall
-          </a>
-        </nav>
-
-        {isLearningWall ? <TopicWall /> : (
-        <section className="hero-section">
+        {isLearningWall ? <><nav className="notes-return" aria-label="site"><a href="/"><HugeiconsIcon icon={ArrowRight01Icon} size={13} strokeWidth={1.6} aria-hidden="true" />back home</a></nav><TopicWall /></> : (
+        <section className="hero-section home-compact">
           <header className="hero-header">
             <h1>{profile.name}</h1>
-            <p className="contact-line">
-              <span>contact intercept • </span>
-              <a href={`mailto:${profile.email}`}>{profile.emailLabel ?? profile.email}</a>
-            </p>
+            <p className="home-tagline">founding engineer · apple platforms & ai</p>
+            <p className="home-building">currently co-founding <a className="inline-underline" href="https://www.gobeet.app/" target="_blank" rel="noreferrer">beet</a>, building across apps, ai & backend systems.</p>
           </header>
-
-          <div className="intro-copy">
-            <RichParagraphs paragraphs={intro} leadFirst />
-          </div>
-
           <NowList />
-
-          <div className="intro-copy outro-copy">
-            <RichParagraphs paragraphs={outro} />
-          </div>
-
-          <div className="pet-row">
-            <button
-              type="button"
-              className={`pet-button${isSpinning ? ' spinning' : ''}`}
-              onClick={togglePet}
-              onAnimationEnd={() => setIsSpinning(false)}
-              aria-label="pet the cat"
-            >
-              <img src="/panda-pet.svg" alt="" className="pet-icon" />
-            </button>
-            <div className="pet-note">
-              <svg viewBox="0 0 78 20" fill="none" aria-hidden="true">
-                <path
-                  d="M76 10 C58 15 37 15 2 10"
-                  className="arrow-stroke"
-                />
-                <path
-                  d="M2 10 L8 6 M2 10 L8 14"
-                  className="arrow-stroke"
-                />
-              </svg>
-              <span>{isPetting ? 'thank you' : 'pet me'}</span>
+          <div className="home-supplement"><About /><RepositoryArchive /></div>
+          <footer className="home-footer">
+            <nav className="home-contact-links" aria-label="contact and more">
+              <a href={learningWall.route}>notes</a>
+              <EmailContact />
+              {contactLinks.filter(link => ['github', 'linkedin'].includes(link.label)).map(link => <a key={link.label} href={link.href} target="_blank" rel="noreferrer">{link.label}</a>)}
+              <a href="https://blog.irangareddy.in" target="_blank" rel="noreferrer">blog</a>
+            </nav>
+            <div className="home-pet">
+              <span className="home-pet-status" role="status">{isPetting ? 'thank you' : ''}</span>
+              <button type="button" className={`pet-button${isReacting ? ' reacting' : ''}`} onClick={togglePet} onAnimationEnd={() => setIsReacting(false)} aria-label="pet the cat" aria-pressed={isPetting}>
+                <img src="/panda-pet.svg" alt="" className="pet-icon" width="32" height="32" />
+              </button>
             </div>
-          </div>
-
-          <div className="link-row">
-            {contactLinks.map((link) => (
-              <div className="link-group" key={link.label}>
-                {link.disabled ? (
-                  <span className="footer-link disabled-link">{link.label}</span>
-                ) : (
-                  <a
-                    className="footer-link"
-                    href={link.href}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {link.label}
-                  </a>
-                )}
-                <svg viewBox="0 0 38 52" fill="none" aria-hidden="true">
-                  <path d="M19 50 C19 38 19 22 19 4" className="arrow-stroke" />
-                  <path d="M19 4 L15 10 M19 4 L23 10" className="arrow-stroke" />
-                </svg>
-                <p className="footer-note">{link.detail}</p>
-              </div>
-            ))}
-          </div>
+          </footer>
         </section>
         )}
       </main>
