@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { ArrowDown01Icon, ArrowRight01Icon, ArrowUpRight01Icon, Copy01Icon, Search01Icon, Tick02Icon } from '@hugeicons/core-free-icons'
+import { ArrowDown01Icon, ArrowRight01Icon, ArrowUpRight01Icon, Cancel01Icon, Copy01Icon, Search01Icon, Tick02Icon } from '@hugeicons/core-free-icons'
 import { allWork, bioProjectLinks, contactLinks, intro, learningWall, now, profile } from './content'
 import { workGroups } from './work'
 import repositories from './repositories.json'
@@ -88,26 +88,86 @@ function projectLinkLabel(href) {
   return 'visit project'
 }
 
-function WorkRows({ items, id }) {
+function WorkRows({ items, id, selectedId, onProjectSelect }) {
   return (
     <ul className="now-list" id={id}>
       {items.map(item => (
         <li key={item.id} className="project-item" id={`work-${item.id}`}>
-          <details className="project-disclosure">
-            <summary className="project-summary">
-              <span className="project-name">{item.name}<HugeiconsIcon icon={ArrowDown01Icon} size={12} strokeWidth={1.6} className="project-chevron" aria-hidden="true" /></span>
-              <span className="now-detail">{item.summary}</span>
-            </summary>
-            <div className="project-expanded">
-              {item.status ? <p className="work-status">{item.status}</p> : null}
-              <p>{item.detail}</p>
-              {item.technologies?.length ? <ul className="project-technologies" aria-label="technologies">{item.technologies.map(technology => <li key={technology}>{technology.toLowerCase()}</li>)}</ul> : null}
-              {item.href ? <a className="project-destination inline-underline" href={item.href} target="_blank" rel="noreferrer">{projectLinkLabel(item.href)}<LinkArrow external /></a> : null}
-            </div>
-          </details>
+          <a className="project-summary" href={`/#work-${item.id}`} aria-current={selectedId === item.id ? 'true' : undefined} aria-haspopup="dialog" onClick={event => {
+            if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+            event.preventDefault()
+            onProjectSelect(item.id)
+          }}>
+            <span className="project-name">{item.name}<HugeiconsIcon icon={ArrowRight01Icon} size={12} strokeWidth={1.6} className="project-chevron" aria-hidden="true" /></span>
+            <span className="now-detail">{item.summary}</span>
+          </a>
         </li>
       ))}
     </ul>
+  )
+}
+
+function ProjectPanel({ item, items, onClose, onProjectSelect }) {
+  const dialogRef = useRef(null)
+  const headingRef = useRef(null)
+  const group = workGroups.find(group => group.items.some(project => project.id === item.id))
+  const index = items.findIndex(project => project.id === item.id)
+  const previous = items[index - 1]
+  const next = index >= 0 ? items[index + 1] : undefined
+
+  useEffect(() => {
+    const dialog = dialogRef.current
+    const opener = document.activeElement
+    const mobile = window.matchMedia('(max-width: 1000px)')
+    const originalOverflow = document.body.style.overflow
+    const show = () => {
+      dialog.close()
+      if (mobile.matches) dialog.showModal()
+      else dialog.show()
+      document.body.style.overflow = mobile.matches ? 'hidden' : originalOverflow
+      headingRef.current?.focus({ preventScroll: true })
+    }
+    show()
+    mobile.addEventListener('change', show)
+    return () => {
+      mobile.removeEventListener('change', show)
+      dialog.close()
+      document.body.style.overflow = originalOverflow
+      if (opener instanceof HTMLElement && opener.isConnected) opener.focus({ preventScroll: true })
+    }
+  }, [])
+
+  useEffect(() => {
+    dialogRef.current.scrollTop = 0
+    headingRef.current.focus({ preventScroll: true })
+  }, [item.id])
+
+  return (
+    <dialog ref={dialogRef} className="project-panel" aria-labelledby="project-panel-title" onCancel={event => { event.preventDefault(); onClose() }} onKeyDown={event => {
+      if (event.key === 'Escape') { event.preventDefault(); onClose() }
+    }}>
+      <div className="project-panel-toolbar">
+        <span>work / {group.title}</span>
+        <button type="button" className="project-panel-close" onClick={onClose} aria-label="close project details"><span>close</span><HugeiconsIcon icon={Cancel01Icon} size={17} strokeWidth={1.5} aria-hidden="true" /></button>
+      </div>
+      <article className="project-panel-content">
+        <header className="project-panel-heading">
+          {item.status ? <p className="work-status">{item.status}</p> : null}
+          <h2 id="project-panel-title" tabIndex={-1} ref={headingRef}>{item.name}</h2>
+          <p className="project-panel-summary">{item.summary}</p>
+        </header>
+        <section className="project-panel-section" aria-label="about the project">
+          <h3>about the project</h3>
+          <p>{item.detail}</p>
+        </section>
+        {item.technologies?.length ? <section className="project-panel-section" aria-label="built with"><h3>built with</h3><ul className="project-technologies">{item.technologies.map(technology => <li key={technology}>{technology.toLowerCase()}</li>)}</ul></section> : null}
+        {item.href ? <a className="project-destination inline-underline" href={item.href} target="_blank" rel="noreferrer">{projectLinkLabel(item.href)}<LinkArrow external /></a> : null}
+        {previous || next ? <nav className="project-panel-pagination" aria-label="more projects">
+          {previous ? <button type="button" onClick={() => onProjectSelect(previous.id)}><span>previous</span>{previous.name}</button> : <span />}
+          {next ? <button type="button" onClick={() => onProjectSelect(next.id)}><span>next</span>{next.name}</button> : null}
+        </nav> : null}
+      </article>
+    </dialog>
   )
 }
 
@@ -141,14 +201,14 @@ function WorkFilters({ value, onChange, resultsId }) {
   )
 }
 
-function NowList({ filter, onFilterChange }) {
+function NowList({ filter, onFilterChange, selectedId, onProjectSelect }) {
   const items = matchingWork(filter)
   return (
     <section className="now-section" aria-label="selected work">
       <div className="home-work-heading"><h2 className="now-heading">work</h2></div>
       <WorkFilters value={filter} onChange={onFilterChange} resultsId="home-work-results" />
       <p className="visually-hidden" role="status">{items.length} {items.length === 1 ? 'entry' : 'entries'} · {workFilters.find(item => item.id === filter).label}</p>
-      <WorkRows items={items} id="home-work-results" />
+      <WorkRows items={items} id="home-work-results" selectedId={selectedId} onProjectSelect={onProjectSelect} />
     </section>
   )
 }
@@ -198,9 +258,8 @@ function TokenBio({ onProjectSelect }) {
     const project = allWork.find(item => item.id === group.project)
     return <a key={key} className="bio-token-link" href={`/#work-${group.project}`} title={`open ${project.name}`} aria-label={`${group.tokens.map(token => token.text).join('').trim()} (open ${project.name} project)`} onClick={event => {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+      event.preventDefault()
       onProjectSelect(group.project)
-      const target = document.getElementById(`work-${group.project}`)
-      if (target) target.querySelector('details').open = true
     }}>{tokens}</a>
   })}</p>
 }
@@ -250,19 +309,37 @@ function EmailContact() {
   )
 }
 
+const projectFromHash = () => allWork.find(item => `#work-${item.id}` === window.location.hash)?.id ?? null
+
 function App() {
   const [pathname, setPathname] = useState(() => normalizePath(window.location.pathname))
-  const [filter, setFilter] = useState(() => window.location.pathname === '/work' || window.location.hash.startsWith('#work-') ? 'all' : 'featured')
-
+  const [filter, setFilter] = useState(() => window.location.pathname === '/work' || (projectFromHash() && !now.some(item => item.id === projectFromHash())) ? 'all' : 'featured')
+  const [selectedId, setSelectedId] = useState(projectFromHash)
+  const selectedProject = allWork.find(item => item.id === selectedId)
   const isLearningWall = learningPaths.includes(pathname)
 
+  const closeProject = () => {
+    if (window.history.state?.projectPanel) window.history.back()
+    else {
+      window.history.replaceState(null, '', window.location.pathname)
+      setSelectedId(null)
+    }
+  }
+
   const changeFilter = value => {
-    if (window.location.hash.startsWith('#work-')) window.history.replaceState(null, '', window.location.pathname)
+    // Keep this selection in the list's history entry when leaving a detail.
+    if (selectedId) {
+      window.history.replaceState(null, '', window.location.pathname)
+      setSelectedId(null)
+    }
     setFilter(value)
   }
 
-  const selectBioProject = id => {
-    if (!document.getElementById(`work-${id}`)) setFilter('all')
+  const selectProject = id => {
+    if (!matchingWork(filter).some(item => item.id === id)) setFilter('all')
+    if (selectedId) window.history.replaceState(window.history.state, '', `/#work-${id}`)
+    else window.history.pushState({ projectPanel: true }, '', `/#work-${id}`)
+    setSelectedId(id)
   }
 
   useEffect(() => {
@@ -270,24 +347,18 @@ function App() {
       const hash = window.location.hash === '#context' ? '#about' : window.location.hash === '#work-index-title' ? '' : window.location.hash
       window.history.replaceState(null, '', `/${hash}`)
     }
-    const revealFragment = () => {
-      const fragment = window.location.hash.slice(1)
-      if (!fragment) return
-      const target = document.getElementById(fragment)
-      if (!target) return
-      const disclosure = target.matches('details') ? target : target.querySelector('details')
-      if (disclosure) disclosure.open = true
-      target.scrollIntoView()
-      if (fragment.startsWith('work-')) target.querySelector('summary')?.focus({ preventScroll: true })
+    const syncProject = () => {
+      const id = projectFromHash()
+      setSelectedId(id)
+      if (id) setFilter(value => matchingWork(value).some(item => item.id === id) ? value : 'all')
     }
-    const handleHashChange = () => {
-      if (window.location.hash.startsWith('#work-') && !document.getElementById(window.location.hash.slice(1))) setFilter('all')
-      revealFragment()
+    window.addEventListener('hashchange', syncProject)
+    window.addEventListener('popstate', syncProject)
+    return () => {
+      window.removeEventListener('hashchange', syncProject)
+      window.removeEventListener('popstate', syncProject)
     }
-    revealFragment()
-    window.addEventListener('hashchange', handleHashChange)
-    return () => window.removeEventListener('hashchange', handleHashChange)
-  }, [pathname, filter])
+  }, [])
 
   useEffect(() => {
     const handlePopState = () => setPathname(normalizePath(window.location.pathname))
@@ -297,7 +368,7 @@ function App() {
   }, [isLearningWall])
 
   return (
-    <div className={`page-shell${isLearningWall ? ' wall-mode' : ' home-mode'}`}>
+    <div className={`page-shell${isLearningWall ? ' wall-mode' : ' home-mode'}${selectedProject && !isLearningWall ? ' project-panel-open' : ''}`}>
       <div className="ambient ambient-primary" aria-hidden="true" />
       <div className="ambient ambient-left" aria-hidden="true" />
       <div className="ambient ambient-right" aria-hidden="true" />
@@ -305,8 +376,8 @@ function App() {
       <main className="page">
         {isLearningWall ? <><nav className="notes-return" aria-label="site"><a href="/"><HugeiconsIcon icon={ArrowRight01Icon} size={13} strokeWidth={1.6} aria-hidden="true" />back home</a></nav><TopicWall /></> : (
         <section className="hero-section home-compact">
-          <ProfileIntro onProjectSelect={selectBioProject} />
-          <NowList filter={filter} onFilterChange={changeFilter} />
+          <ProfileIntro onProjectSelect={selectProject} />
+          <NowList filter={filter} onFilterChange={changeFilter} selectedId={selectedId} onProjectSelect={selectProject} />
           <div className="home-supplement"><RepositoryArchive /></div>
           <footer className="home-footer">
             <nav className="home-contact-links" aria-label="contact and more">
@@ -320,6 +391,7 @@ function App() {
         </section>
         )}
       </main>
+      {selectedProject && !isLearningWall ? <ProjectPanel item={selectedProject} items={matchingWork(filter)} onClose={closeProject} onProjectSelect={selectProject} /> : null}
     </div>
   )
 }
