@@ -12,10 +12,11 @@ export const intro = [
     { text: 'the projects kept getting wider.' },
   ],
   [
-    { text: "i'm co-founding beet. along the way, i've built on-device dictation for mac, fine-tuned emotional speech models, and used vision pro to control a robot dog." },
+    { text: "i'm a co-founder at beet. along the way, i've built on-device dictation for mac, fine-tuned emotional speech models, and used vision pro to control a robot dog." },
   ],
   [
-    { text: '2× apple swift student challenge winner · m.s., san josé state, 2026' },
+    { text: 'two-time apple swift student challenge winner.\n' },
+    { text: "master's in applied data intelligence · san josé state, 2026" },
   ],
 ]
 

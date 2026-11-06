@@ -733,6 +733,7 @@ a:focus-visible, a:focus-visible > .link-arrow, .work-chip:focus-visible .work-c
 .bio-note p:first-child > span { display: block; }
 .home-about .bio-note p:nth-child(2) { max-width: 36rem; margin-top: 1.1rem; font-size: .85rem; line-height: 1.8; }
 .home-about .bio-note p:last-child { margin-top: 1.35rem; font-size: .82rem; line-height: 1.7; color: var(--muted); }
+.bio-note p:last-child > span { display: block; }
 .home-about .token-bio { font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace; font-size: .78rem; line-height: 2.1; color: #f2eef5; }
 .token-bio .token-stream { white-space: pre-wrap; overflow-wrap: anywhere; }
 .token-bio .bio-token { padding: .08em 0; border-radius: 0; -webkit-box-decoration-break: clone; box-decoration-break: clone; }

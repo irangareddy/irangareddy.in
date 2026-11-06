@@ -100,7 +100,7 @@ function WorkRows({ items, id }) {
             <div className="project-expanded">
               {item.status ? <p className="work-status">{item.status}</p> : null}
               <p>{item.detail}</p>
-              {item.technologies?.length ? <ul className="project-technologies" aria-label="technologies">{item.technologies.map(technology => <li key={technology}>{technology}</li>)}</ul> : null}
+              {item.technologies?.length ? <ul className="project-technologies" aria-label="technologies">{item.technologies.map(technology => <li key={technology}>{technology.toLowerCase()}</li>)}</ul> : null}
               {item.href ? <a className="project-destination inline-underline" href={item.href} target="_blank" rel="noreferrer">{projectLinkLabel(item.href)}<LinkArrow external /></a> : null}
             </div>
           </details>
@@ -165,7 +165,7 @@ function RepositoryArchive() {
       </label>
       <p className="repository-count" role="status">{results.length} of {repositories.length} repositories</p>
       {results.length ? <ul className="repository-list">{results.map(repo => (
-        <li key={repo.name}><a className="inline-underline" href={repo.href} target="_blank" rel="noreferrer">{repo.name}</a><span>{[repo.language, repo.fork ? 'fork' : ''].filter(Boolean).join(' · ')}</span></li>
+        <li key={repo.name}><a className="inline-underline" href={repo.href} target="_blank" rel="noreferrer">{repo.name.toLowerCase()}</a><span>{[repo.language, repo.fork ? 'fork' : ''].filter(Boolean).join(' · ').toLowerCase()}</span></li>
       ))}</ul> : <p className="archive-intro">no matches. try a project name or a language such as swift or python.</p>}
     </details>
   )
@@ -216,7 +216,7 @@ function ProfileIntro({ onProjectSelect }) {
           <button type="button" aria-pressed={showTokens} aria-controls="bio-copy" onClick={() => setShowTokens(true)}>tokens</button>
         </div>
       </div>
-      {showTokens ? <p className="bio-view-hint" title={`${bioTokens.encoding} · ${bioTokens.generator}`}>{bioTokens.tokens.length} GPT tokens · underlined phrases open projects</p> : null}
+      {showTokens ? <p className="bio-view-hint" title={`${bioTokens.encoding} · ${bioTokens.generator}`.toLowerCase()}>{bioTokens.tokens.length} gpt tokens · underlined phrases open projects</p> : null}
       <div className={`intro-copy ${showTokens ? 'token-bio' : 'bio-note'}`} id="bio-copy">{showTokens ? <TokenBio onProjectSelect={onProjectSelect} /> : <RichParagraphs paragraphs={intro} />}</div>
     </header>
   )

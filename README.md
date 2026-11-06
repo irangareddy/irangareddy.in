@@ -40,6 +40,8 @@ Current design baseline approved on 2026-11-05: preserve the visible written bio
 
 The text-first homepage is the complete portfolio. The short biography is visible directly beneath the name, with a small text/tokens switch. Project rows expand in place to show attribution, the full description, and a public destination when one is available. The searchable code archive is a collapsible section below the list. Notes live at `/wall` and are linked from the footer.
 
+Visible copy is lowercase, including technology labels, repository display names/languages, and the GPT token caption. Keep canonical casing in source metadata, identifiers, and destination URLs. The biography's credentials use full words on two lines rather than degree abbreviations.
+
 - `src/work.js`: grouped work entries, with team/prototype/coursework attribution and public links.
 - `src/content.js`: biography and featured entries selected from the complete work record.
 - `src/repositories.json`: public GitHub repository snapshot from November 2026. Forks are marked; no private repository metadata is included.
